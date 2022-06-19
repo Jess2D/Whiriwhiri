@@ -1,3 +1,4 @@
+//json object
 const accomodation = [
   {
     type: "Hotel",
@@ -33,7 +34,8 @@ const accomodation = [
   },
 ];
 
-let select = document.getElementById("type");
+//select item for type of acomodation
+let select = document.getElementById("select_box");
 for (let i = 0; i < accomodation.length; i++) {
   let option = document.createElement("option");
   option.value = accomodation[i].type;
@@ -41,12 +43,14 @@ for (let i = 0; i < accomodation.length; i++) {
   select.appendChild(option);
 }
 
+//div results for each filter
 let results = document.getElementById("results");
 
 accomodation.map((elemnt) => {
   let card = document.createElement("div");
-  card.classList.add("card");
+  card.classList.add("hide");
   results.appendChild(card);
+  card.setAttribute("id", elemnt.type);
 
   let title = document.createElement("div");
   title.classList.add("title");
@@ -72,3 +76,15 @@ accomodation.map((elemnt) => {
     " max nights";
   card.appendChild(night);
 });
+
+$("#select_box")
+  .change(function () {
+    var select = $(this).find(":selected").val();
+    if (select == "all") {
+      $(".hide").show();
+    } else {
+      $(".hide").hide();
+      $("#" + select).show();
+    }
+  })
+  .change();
