@@ -40,3 +40,35 @@ for (let i = 0; i < accomodation.length; i++) {
   option.textContent = accomodation[i].type;
   select.appendChild(option);
 }
+
+let results = document.getElementById("results");
+
+accomodation.map((elemnt) => {
+  let card = document.createElement("div");
+  card.classList.add("card");
+  results.appendChild(card);
+
+  let title = document.createElement("div");
+  title.classList.add("title");
+  title.innerText = elemnt.type;
+  card.appendChild(title);
+
+  let pax = document.createElement("div");
+  pax.classList.add("pax");
+  pax.innerText = elemnt["min-people"] + "-" + elemnt["max-people"] + " people";
+  card.appendChild(pax);
+
+  let price = document.createElement("div");
+  price.classList.add("price");
+  price.innerText = elemnt.price;
+  card.appendChild(price);
+
+  let night = document.createElement("div");
+  night.classList.add("night");
+  night.innerText =
+    elemnt["min-night"] +
+    " min nights - " +
+    elemnt["max-night"] +
+    " max nights";
+  card.appendChild(night);
+});
