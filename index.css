@@ -1,0 +1,6 @@
+.topSearch {
+  display: flex;
+  flex-direction: row;
+  gap: 23px;
+  justify-content: baseline;
+}

@@ -14,8 +14,19 @@
 <body>
     <div class="top">
         <div class="content">
+            <div class="topSearch">
+                <div class="search">
+                    <input type="text" id="query" name="query">
+                </div>
+                <div class="dates">
+                    <input id="in" type="date">
+                    <input id="out" type="date">
+                </div>
+                <button id="button">Search</button>
+            </div>
             <div class="filter">
                 <select name="type" id="select_box">
+                    <option value="none">Select by type of accomodation</option>
                     <option value="all">all</option>
                 </select>
             </div>
@@ -23,7 +34,6 @@
     </div>
     <div class="main">
         <div class="results" id="results">
-
         </div>
     </div>
     <script type="text/javascript" src="filter.js"></script>
