@@ -3,6 +3,7 @@ let form = document.getElementById("button");
 let TotalDays;
 button.onclick = function (e) {
   e.preventDefault();
+  $(".hide").remove();
   let startDate = document.getElementById("in").value;
   let endDate = document.getElementById("out").value;
   let date1 = new Date(startDate);
@@ -16,13 +17,12 @@ button.onclick = function (e) {
     );
   });
   getResults(filteredAccomodation);
-  console.log(filteredAccomodation);
 };
 
 const getResults = (filtered) => {
   filtered.map((element) => {
     let results = document.getElementById("results");
-    //results.removeChild(card)
+
     let card = document.createElement("div");
     card.classList.add("hide");
     results.appendChild(card);
