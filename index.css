@@ -1,6 +1,36 @@
-.topSearch {
-  display: flex;
-  flex-direction: row;
-  gap: 23px;
-  justify-content: baseline;
+body {
+  font-family: "Raleway", sans-serif;
+}
+
+#form {
+  padding: 32px;
+}
+
+#button {
+  margin-top: 32px;
+}
+
+.filter {
+  width: 300px;
+  margin-left: 32px;
+  padding-bottom: 32px;
+}
+
+.top {
+  background-color: #061826;
+  color: #b5b5b5;
+  width: 100%;
+}
+
+.logo2 img {
+  width: 200px;
+  padding: 12px;
+}
+
+.marketing {
+  padding: 32px;
+  font-size: 58px;
+  align-self: flex-start;
+  color: #357088;
+  margin-left: 32px;
 }
