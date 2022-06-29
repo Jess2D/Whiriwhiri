@@ -24,25 +24,35 @@ const getResults = (filtered) => {
     let results = document.getElementById("results");
 
     let card = document.createElement("div");
-    card.classList.add("hide");
+    card.classList.add("card");
     results.appendChild(card);
-    card.setAttribute("id", element.type);
+
+    let cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+    card.appendChild(cardBody);
+
+    let hide = document.createElement("div");
+    hide.classList.add("hide");
+    cardBody.appendChild(hide);
+    hide.setAttribute("id", element.type);
 
     let title = document.createElement("div");
+    title.classList.add("card-title");
     title.classList.add("title");
     title.innerText = element.type;
-    card.appendChild(title);
+    cardBody.appendChild(title);
 
     let pax = document.createElement("div");
+    pax.classList.add("card-text");
     pax.classList.add("pax");
     pax.innerText =
       element["min-people"] + "-" + element["max-people"] + " people";
-    card.appendChild(pax);
+    cardBody.appendChild(pax);
 
     let price = document.createElement("div");
     price.classList.add("price");
     price.innerText = element.price;
-    card.appendChild(price);
+    cardBody.appendChild(price);
 
     let night = document.createElement("div");
     night.classList.add("night");
@@ -51,6 +61,6 @@ const getResults = (filtered) => {
       " min nights - " +
       element["max-night"] +
       " max nights";
-    card.appendChild(night);
+    cardBody.appendChild(night);
   });
 };
