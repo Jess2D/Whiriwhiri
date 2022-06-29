@@ -1,4 +1,4 @@
-import { accomodation } from "./accomodation.js";
+import { accomodation, getResults } from "./accomodation.js";
 let form = document.getElementById("button");
 let TotalDays;
 button.onclick = function (e) {
@@ -19,54 +19,4 @@ button.onclick = function (e) {
     );
   });
   getResults(filteredAccomodation);
-};
-
-const getResults = (filtered) => {
-  let results = document.getElementById("results");
-  let h3 = document.createElement("h3");
-  h3.textContent = "Results";
-
-  results.appendChild(h3);
-
-  filtered.map((element) => {
-    let card = document.createElement("div");
-    card.classList.add("card");
-    results.appendChild(card);
-
-    let cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
-    card.appendChild(cardBody);
-
-    let hide = document.createElement("div");
-    hide.classList.add("hide");
-    cardBody.appendChild(hide);
-    hide.setAttribute("id", element.type);
-
-    let title = document.createElement("div");
-    title.classList.add("card-title");
-    title.classList.add("title");
-    title.innerText = element.type;
-    cardBody.appendChild(title);
-
-    let pax = document.createElement("div");
-    pax.classList.add("card-text");
-    pax.classList.add("pax");
-    pax.innerText =
-      element["min-people"] + "-" + element["max-people"] + " people";
-    cardBody.appendChild(pax);
-
-    let price = document.createElement("div");
-    price.classList.add("price");
-    price.innerText = element.price;
-    cardBody.appendChild(price);
-
-    let night = document.createElement("div");
-    night.classList.add("night");
-    night.innerText =
-      element["min-night"] +
-      " min nights - " +
-      element["max-night"] +
-      " max nights";
-    cardBody.appendChild(night);
-  });
 };

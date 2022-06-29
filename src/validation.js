@@ -1,5 +1,3 @@
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-
 $("#out").change(function () {
   var startDate = document.getElementById("in").value;
   var endDate = document.getElementById("out").value;
