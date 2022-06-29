@@ -3,7 +3,9 @@ let form = document.getElementById("button");
 let TotalDays;
 button.onclick = function (e) {
   e.preventDefault();
-  $(".hide").remove();
+  $(".card").remove();
+  $("h3").remove();
+
   let startDate = document.getElementById("in").value;
   let endDate = document.getElementById("out").value;
   let date1 = new Date(startDate);
@@ -20,9 +22,13 @@ button.onclick = function (e) {
 };
 
 const getResults = (filtered) => {
-  filtered.map((element) => {
-    let results = document.getElementById("results");
+  let results = document.getElementById("results");
+  let h3 = document.createElement("h3");
+  h3.textContent = "Results";
 
+  results.appendChild(h3);
+
+  filtered.map((element) => {
     let card = document.createElement("div");
     card.classList.add("card");
     results.appendChild(card);
