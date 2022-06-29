@@ -7,6 +7,7 @@ const accomodation = [
     "min-night": "1",
     "max-night": "5",
     days: "4",
+    img: "./src/assets/img/types/hotel.png",
   },
   {
     type: "Hostel",
@@ -16,6 +17,7 @@ const accomodation = [
     "min-night": "1",
     "max-night": "10",
     days: "9",
+    img: "./src/assets/img/types/hotel.png",
   },
   {
     type: "Motel",
@@ -25,6 +27,7 @@ const accomodation = [
     "min-night": "3",
     "max-night": "10",
     days: "17",
+    img: "./src/assets/img/types/motel.png",
   },
   {
     type: "House",
@@ -34,16 +37,17 @@ const accomodation = [
     "min-night": "2",
     "max-night": "15",
     days: "13",
+    img: "./src/assets/img/types/house.png",
   },
 ];
 
 const getResults = (filtered) => {
-  filtered.map((element) => {
-    let results = document.getElementById("results");
-    let h3 = document.createElement("h3");
-    h3.textContent = "Results";
+  let results = document.getElementById("results");
+  let h3 = document.createElement("h3");
+  h3.textContent = "Results";
+  results.appendChild(h3);
 
-    results.appendChild(h3);
+  filtered.map((element) => {
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("bg-light");
@@ -61,19 +65,30 @@ const getResults = (filtered) => {
 
     let cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
+    cardBody.classList.add("row");
     card.appendChild(cardBody);
+
+    let img = document.createElement("img");
+    img.src = element.img;
+    img.classList.add("card-img-left");
+    img.classList.add("col");
+    cardBody.appendChild(img);
+
+    let col = document.createElement("div");
+    col.classList.add("col");
+    cardBody.appendChild(col);
 
     let pax = document.createElement("div");
     pax.classList.add("card-text");
     pax.classList.add("pax");
     pax.innerText =
       element["min-people"] + "-" + element["max-people"] + " people";
-    cardBody.appendChild(pax);
+    col.appendChild(pax);
 
     let price = document.createElement("div");
     price.classList.add("price");
     price.innerText = "$ " + element.price + " /nigth";
-    cardBody.appendChild(price);
+    col.appendChild(price);
 
     let night = document.createElement("div");
     night.classList.add("night");
@@ -82,7 +97,7 @@ const getResults = (filtered) => {
       " min nights - " +
       element["max-night"] +
       " max nights";
-    cardBody.appendChild(night);
+    col.appendChild(night);
   });
 };
 
