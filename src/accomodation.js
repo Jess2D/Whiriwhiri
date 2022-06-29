@@ -3,7 +3,7 @@ const accomodation = [
     type: "Hotel",
     "min-people": "1",
     "max-people": "2",
-    price: "$157/night",
+    price: "157",
     "min-night": "1",
     "max-night": "5",
     days: "4",
@@ -12,7 +12,7 @@ const accomodation = [
     type: "Hostel",
     "min-people": "1",
     "max-people": "1",
-    price: "$30/night",
+    price: "30",
     "min-night": "1",
     "max-night": "10",
     days: "9",
@@ -21,7 +21,7 @@ const accomodation = [
     type: "Motel",
     "min-people": "2",
     "max-people": "4",
-    price: "$90/night",
+    price: "90",
     "min-night": "3",
     "max-night": "10",
     days: "17",
@@ -30,7 +30,7 @@ const accomodation = [
     type: "House",
     "min-people": "1",
     "max-people": "4",
-    price: "$240/night",
+    price: "240",
     "min-night": "2",
     "max-night": "15",
     days: "13",
@@ -72,7 +72,7 @@ const getResults = (filtered) => {
 
     let price = document.createElement("div");
     price.classList.add("price");
-    price.innerText = element.price;
+    price.innerText = "$ " + element.price + " /nigth";
     cardBody.appendChild(price);
 
     let night = document.createElement("div");

@@ -55,17 +55,25 @@
                 </div>
                 <div class="col-2 "><button id="button" class="  btn btn-primary" type="submit">Search</button>
                 </div>
-
             </form>
-            <div class="filter content">
-                <label class="form-label">Others filters:</label>
-                <select name="type" class="form-control" id="select_box">
-                    <option value="none">Select by type of accomodation</option>
-                    <option value="House">House</option>
-                    <option value="Hotel">Hotel</option>
-                    <option value="Hostel">Hostel</option>
-                    <option value="Motel">Motel</option>
-                </select>
+            <div class="filter-pad">
+                <div class="filter row">
+                    <label class="form-label">Others filters:</label>
+                    <select name="type" class="type form-control col" id="select_box">
+                        <option value="none">Select by type of accomodation</option>
+                        <option value="House">House</option>
+                        <option value="Hotel">Hotel</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="Motel">Motel</option>
+                    </select>
+                    <select name="price" class="form-control col" id="price">
+                        <option value="none">Select by price</option>
+                        <option value="30">Less than $50</option>
+                        <option value="90">More than $50</option>
+                        <option value="157">More than $100</option>
+                        <option value="240">More than $200</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
@@ -75,7 +83,8 @@
     </div>
     <script type="module" src="./src/accomodation.js"></script>
     <script type="module" src="./src/filterByAccomodation.js"></script>
-    <script type="javascript" src="./src/validation.js"></script>
+    <script type="module" src="./src/filterByPrice.js""></script>
+    <script type=" javascript" src="./src/validation.js"></script>
     <script type="module" src="./src/search.js"></script>
 </body>
 

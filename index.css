@@ -11,11 +11,17 @@ body {
 }
 
 .filter {
-  width: 300px;
-  margin-left: 32px;
   padding-bottom: 32px;
+  width: 600px;
+}
+.type {
+  margin-left: 12px;
+  margin-right: 12px;
 }
 
+.filter-pad {
+  padding-left: 32px;
+}
 .top {
   background-color: #061826;
   color: #b5b5b5;

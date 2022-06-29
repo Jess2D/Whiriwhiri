@@ -18,4 +18,5 @@ select.onchange = () => {
   }
 
   getResults(filteredAccomodation);
+  select.value = "none";
 };
