@@ -53,8 +53,8 @@ function App() {
         && (item.type === type || type === 'all')
       )
       .map(item => (
-        <Col key={item.type} onClick={() => handleShow(item.type)}>
-          <Card>
+        <Col key={item.type} >
+          <Card style={{ cursor: "pointer" }} onClick={() => handleShow(item.type)}>
             <Card.Img variant="top" src={item.image} />
             <Card.Body>
               <Card.Title>{item.type}</Card.Title>
