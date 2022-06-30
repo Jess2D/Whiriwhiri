@@ -1,0 +1,54 @@
+body {
+  font-family: "Raleway", sans-serif;
+}
+
+#form {
+  padding: 32px;
+}
+
+#button {
+  margin-top: 32px;
+}
+
+.filter {
+  padding-bottom: 32px;
+  width: 600px;
+}
+.type {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.filter-pad {
+  padding-left: 32px;
+}
+.top {
+  background-color: #061826;
+  color: #b5b5b5;
+  width: 100%;
+}
+
+.logo2 img {
+  width: 200px;
+  padding: 12px;
+}
+
+.marketing {
+  padding: 32px;
+  font-size: 58px;
+  align-self: flex-start;
+  color: #357088;
+  margin-left: 32px;
+}
+
+.results {
+  padding: 32px;
+}
+
+.card {
+  margin-bottom: 24px;
+}
+
+.img-accomodation img {
+  width: 100px;
+}
