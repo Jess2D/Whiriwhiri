@@ -13,7 +13,7 @@ interface Accomodation {
     price: string;
 }
 
-export const accomodatio: Accomodation[] =
+export const accomodation: Accomodation[] =
     [
         { image: hotel, type: "Hotel", minPeople: 1, maxPeople: 2, price: "$157/night", minNight: 1, maxNight: 5 },
         { image: hostel, type: "Hostel", minPeople: 1, maxPeople: 1, price: "$30/night", minNight: 1, maxNight: 10 },

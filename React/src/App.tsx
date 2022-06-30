@@ -3,19 +3,31 @@ import logo from './logo.png';
 
 import { Button, Card, Col, Container, Form, ListGroup, Row, Stack } from 'react-bootstrap';
 import styled from "styled-components";
-import { accomodatio } from './data';
+import { accomodation } from './data';
+import { dateDifferenceInDays, isNumberBetweenMinMax } from './utils';
 
 
 function App() {
 
   const [validated, setValidated] = useState(false);
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [location, setLocation] = useState("");
+  const [numberPeople, setNumberPeople] = useState("");
+  const [type, setType] = useState("");
 
   const handleSubmit = (event: any) => {
     const form = event.currentTarget;
+    event.preventDefault();
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
     }
+
+    setLocation(event.target.elements.formLocation.value)
+    setCheckIn(event.target.elements.formCheckIn.value)
+    setCheckOut(event.target.elements.formCheckOut.value)
+    setNumberPeople(event.target.elements.formNumberPeople.value)
+    setType(event.target.elements.formType.value)
 
     setValidated(true);
   };
@@ -32,10 +44,7 @@ function App() {
                 <Row>
                   <Col>
                     <Form.Group className="mb-6" controlId="formLocation">
-                      <Form.Control type="text" placeholder="Location" required />
-                      <Form.Control.Feedback type="invalid">
-                        Please choose a location.
-                      </Form.Control.Feedback>
+                      <Form.Control type="text" placeholder="Location" />
                     </Form.Group>
                   </Col>
                   <Col>
@@ -57,10 +66,22 @@ function App() {
                   <Col>
                     <Form.Group className="mb-6" controlId="formNumberPeople" placeholder='Number of people'>
                       <Form.Select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option value="any">Guests</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group className="mb-6" controlId="formType" placeholder='Accomodation type'>
+                      <Form.Select>
+                        <option value="all">Accomodation</option>
+                        <option value="Hotel">Hotel</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="Motel">Motel</option>
+                        <option value="House">House</option>
                       </Form.Select>
                     </Form.Group>
                   </Col>
@@ -79,63 +100,35 @@ function App() {
           </Container>
         </StyledTopSection>
 
-        <StyledFilterSection>
-          <Form>
-            <Container>
-              <Row>
-                <Col>
-                  <Form.Group className="mb-6" controlId="formNumberPeople" placeholder='Accomodation type'>
-                    <Form.Select>
-                      <option>Filter by type</option>
-                      <option>Hotel</option>
-                      <option>Hostel</option>
-                      <option>Motel</option>
-                      <option>House</option>
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group className="mb-6" controlId="formNumberPeople" placeholder='Price range'>
-                    <Form.Select>
-                      <option>Filter by price</option>
-                      <option>Less than $50</option>
-                      <option>Between $50 - $100</option>
-                      <option>Between $100 - $200</option>
-                      <option>Between $200 - $300</option>
-                    </Form.Select>
-                  </Form.Group>
-                </Col>
-                <Col></Col>
-                <Col></Col>
-                <Col></Col>
-              </Row>
-            </Container>
-          </Form>
-        </StyledFilterSection>
-
         <StyledContentSection>
           <Container>
             <Row>
               <Form.Label column="lg" style={{ textAlign: "left" }}><b>Results</b></Form.Label>
             </Row>
             <Row xs={1} md={4} className="g-4">
-              {accomodatio.map(item => (
-                <Col>
-                  <Card>
-                    <Card.Img variant="top" src={item.image} />
-                    <Card.Body>
-                      <Card.Title>{item.type}</Card.Title>
-                      <Card.Text>
+              {accomodation
+                .filter(item =>
+                  (numberPeople === 'any' || isNumberBetweenMinMax(item.minPeople, item.maxPeople, parseInt(numberPeople)))
+                  && isNumberBetweenMinMax(item.minNight, item.maxNight, dateDifferenceInDays(checkIn, checkOut))
+                  && (item.type === type || type === 'all')
+                )
+                .map(item => (
+                  <Col key={item.type}>
+                    <Card>
+                      <Card.Img variant="top" src={item.image} />
+                      <Card.Body>
+                        <Card.Title>{item.type}</Card.Title>
+
                         <ListGroup variant='flush'>
                           <ListGroup.Item>{item.minNight} to {item.maxNight} nights</ListGroup.Item>
                           <ListGroup.Item>{item.minPeople} to {item.maxPeople} guests</ListGroup.Item>
                           <ListGroup.Item><b>{item.price}</b> per night</ListGroup.Item>
                         </ListGroup>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
+
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
             </Row>
           </Container>
         </StyledContentSection>
