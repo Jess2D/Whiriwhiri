@@ -123,6 +123,7 @@ function App() {
 
         <StyledTopSection>
           <img src={logo} alt="Logo" width={"300px"} />
+          <StyledTitle>What's your next stay?</StyledTitle>
           <Container>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <StyledMainInputRow>
@@ -231,3 +232,7 @@ const StyledMainInputRow = styled.div`
   padding: .5rem;
   border-radius: .2rem;
 `;
+
+const StyledTitle = styled.h1`
+color: #0471A6
+`
