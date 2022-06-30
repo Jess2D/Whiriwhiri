@@ -37,12 +37,43 @@ function App() {
   const [accomodationSelected, setAccomodationSelected] = useState(accomodation[0]);
 
   const handleClose = () => setShow(false);
+
   const handleShow = (accomodationType: string) => {
     setAccomodationSelected(accomodation.find(item => item.type === accomodationType) || accomodation[0]);
     setShow(true);
   }
 
   const handleModalSubmit = () => null;
+
+  const filterAccomodation = () => {
+    const list = accomodation
+      .filter(item =>
+        (numberPeople === 'any' || isNumberBetweenMinMax(item.minPeople, item.maxPeople, parseInt(numberPeople)))
+        && isNumberBetweenMinMax(item.minNight, item.maxNight, dateDifferenceInDays(checkIn, checkOut))
+        && (item.type === type || type === 'all')
+      )
+      .map(item => (
+        <Col key={item.type} onClick={() => handleShow(item.type)}>
+          <Card>
+            <Card.Img variant="top" src={item.image} />
+            <Card.Body>
+              <Card.Title>{item.type}</Card.Title>
+
+              <ListGroup variant='flush'>
+                <ListGroup.Item>{item.minNight} to {item.maxNight} nights</ListGroup.Item>
+                <ListGroup.Item>{item.minPeople} to {item.maxPeople} guests</ListGroup.Item>
+                <ListGroup.Item><b>{item.price}</b> per night</ListGroup.Item>
+              </ListGroup>
+
+            </Card.Body>
+          </Card>
+        </Col>
+      ))
+
+    return list.length > 0
+      ? list
+      : <Container>No results to show</Container>
+  }
 
   return (
     <StyledApp>
@@ -131,7 +162,7 @@ function App() {
                   <Col>
                     <Form.Group className="mb-6" controlId="formType" placeholder='Accomodation type'>
                       <Form.Select>
-                        <option value="all">Accomodation</option>
+                        <option value="all">Type</option>
                         <option value="Hotel">Hotel</option>
                         <option value="Hostel">Hostel</option>
                         <option value="Motel">Motel</option>
@@ -157,32 +188,10 @@ function App() {
         <StyledContentSection>
           <Container>
             <Row>
-              <Form.Label column="lg" style={{ textAlign: "left" }}><b>Results</b></Form.Label>
+              <Form.Label column="lg" style={{ textAlign: "left" }}><b>{validated && "Results"}</b></Form.Label>
             </Row>
             <Row xs={1} md={4} className="g-4">
-              {accomodation
-                .filter(item =>
-                  (numberPeople === 'any' || isNumberBetweenMinMax(item.minPeople, item.maxPeople, parseInt(numberPeople)))
-                  && isNumberBetweenMinMax(item.minNight, item.maxNight, dateDifferenceInDays(checkIn, checkOut))
-                  && (item.type === type || type === 'all')
-                )
-                .map(item => (
-                  <Col key={item.type} onClick={() => handleShow(item.type)}>
-                    <Card>
-                      <Card.Img variant="top" src={item.image} />
-                      <Card.Body>
-                        <Card.Title>{item.type}</Card.Title>
-
-                        <ListGroup variant='flush'>
-                          <ListGroup.Item>{item.minNight} to {item.maxNight} nights</ListGroup.Item>
-                          <ListGroup.Item>{item.minPeople} to {item.maxPeople} guests</ListGroup.Item>
-                          <ListGroup.Item><b>{item.price}</b> per night</ListGroup.Item>
-                        </ListGroup>
-
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                ))}
+              {filterAccomodation()}
             </Row>
           </Container>
         </StyledContentSection>
