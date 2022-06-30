@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.png';
 
 import { Button, Card, Col, Container, Form, ListGroup, Row, Stack } from 'react-bootstrap';
@@ -7,6 +7,19 @@ import { accomodatio } from './data';
 
 
 function App() {
+
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event: any) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
   return (
     <StyledApp>
       <Stack>
@@ -14,22 +27,31 @@ function App() {
         <StyledTopSection>
           <img src={logo} alt="Logo" width={"300px"} />
           <Container>
-            <Form>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <StyledMainInputRow>
                 <Row>
                   <Col>
                     <Form.Group className="mb-6" controlId="formLocation">
-                      <Form.Control type="text" placeholder="Location" />
+                      <Form.Control type="text" placeholder="Location" required />
+                      <Form.Control.Feedback type="invalid">
+                        Please choose a location.
+                      </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                   <Col>
                     <Form.Group className="mb-6" controlId="formCheckIn">
-                      <Form.Control type="date" name="dob" placeholder="Check-In Date" />
+                      <Form.Control type="date" name="dob" placeholder="Check-In Date" required />
+                      <Form.Control.Feedback type="invalid">
+                        Please provide a check-in date.
+                      </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                   <Col>
-                    <Form.Group className="mb-6" controlId="formCheckOut">
-                      <Form.Control type="date" name="dob" placeholder="Check-Out Date" />
+                    <Form.Group className="mb-6" controlId="formCheckOut" >
+                      <Form.Control type="date" name="dob" placeholder="Check-Out Date" required />
+                      <Form.Control.Feedback type="invalid">
+                        Please provide a check-out date.
+                      </Form.Control.Feedback>
                     </Form.Group>
                   </Col>
                   <Col>
@@ -39,10 +61,6 @@ function App() {
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
                       </Form.Select>
                     </Form.Group>
                   </Col>
@@ -141,7 +159,7 @@ const StyledTopSection = styled.div`
 `;
 
 const StyledFilterSection = styled.div`
-  background-color: #b5b5b5;
+  background-color: #357088;
   padding: 1rem;
   height: 100%;
 `;
@@ -153,7 +171,7 @@ const StyledContentSection = styled.div`
 `;
 
 const StyledMainInputRow = styled.div`
-  background-color: #357088;
+  background-color: #ffffff;
   padding: .5rem;
   border-radius: .2rem;
 `;
