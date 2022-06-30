@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.png';
 
-import { Button, Card, Col, Container, Form, ListGroup, Row, Stack } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, ListGroup, Modal, Row, Stack } from 'react-bootstrap';
 import styled from "styled-components";
 import { accomodation } from './data';
 import { dateDifferenceInDays, isNumberBetweenMinMax } from './utils';
@@ -32,8 +32,62 @@ function App() {
     setValidated(true);
   };
 
+
+  const [show, setShow] = useState(false);
+  const [accomodationSelected, setAccomodationSelected] = useState(accomodation[0]);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (accomodationType: string) => {
+    setAccomodationSelected(accomodation.find(item => item.type === accomodationType) || accomodation[0]);
+    setShow(true);
+  }
+
+  const handleModalSubmit = () => null;
+
   return (
     <StyledApp>
+      <>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>{accomodationSelected.type} Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleModalSubmit}>
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Label>Dietary restrictions</Form.Label>
+                    <Form.Check type="checkbox" label="Gluten Free" />
+                    <Form.Check type="checkbox" label="Dairy Free" />
+                    <Form.Check type="checkbox" label="Vegan" />
+                    <Form.Check type="checkbox" label="Keto" />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Label>Include meals</Form.Label>
+                    <Form.Check type="checkbox" label="Breakfast (included)" disabled checked />
+                    <Form.Check type="checkbox" label="Lunch" />
+                    <Form.Check type="checkbox" label="Dinner" />
+                    <Form.Check type="checkbox" label="Dessert" />
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+
       <Stack>
 
         <StyledTopSection>
@@ -113,7 +167,7 @@ function App() {
                   && (item.type === type || type === 'all')
                 )
                 .map(item => (
-                  <Col key={item.type}>
+                  <Col key={item.type} onClick={() => handleShow(item.type)}>
                     <Card>
                       <Card.Img variant="top" src={item.image} />
                       <Card.Body>
