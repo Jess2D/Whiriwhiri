@@ -12,7 +12,6 @@ function App() {
   const [validated, setValidated] = useState(false);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
-  const [location, setLocation] = useState("");
   const [numberPeople, setNumberPeople] = useState("");
   const [type, setType] = useState("");
 
@@ -23,7 +22,6 @@ function App() {
       event.stopPropagation();
     }
 
-    setLocation(event.target.elements.formLocation.value)
     setCheckIn(event.target.elements.formCheckIn.value)
     setCheckOut(event.target.elements.formCheckOut.value)
     setNumberPeople(event.target.elements.formNumberPeople.value)
@@ -213,12 +211,6 @@ const StyledApp = styled.div`
 const StyledTopSection = styled.div`
   background-color: #061826;
   padding: 1rem;
-`;
-
-const StyledFilterSection = styled.div`
-  background-color: #357088;
-  padding: 1rem;
-  height: 100%;
 `;
 
 const StyledContentSection = styled.div`
